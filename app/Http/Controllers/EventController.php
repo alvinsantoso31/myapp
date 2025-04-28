@@ -27,6 +27,7 @@ class EventController extends Controller
             'nama_event' => 'required|string|max:100',
             'deskripsi_event' => 'required|string',
             'tanggal_event' => 'required|date',
+            'tanggal_closing' => 'required|date',
             'lokasi_event' => 'required|string|max:100',
             'jadwal_briefing' => 'required|date_format:Y-m-d\TH:i',
             'tipe_event' => 'required|string|max:50',
@@ -37,18 +38,18 @@ class EventController extends Controller
                 'created_at' => now(),
                 'updated_at' => now(),
             ]));
-            return redirect('event')->with('success', 'Event berhasil ditambahkan!');
+            return redirect('detailEvents')->with('success', 'Event berhasil ditambahkan!');
         } else {
             DB::table('events')->where('id_event', request()->id_event)->update(array_merge($validated, [
                 'updated_at' => now(),
             ]));
-            return redirect('event')->with('success', 'Event berhasil diperbarui!');
+            return redirect('detailEvents')->with('success', 'Event berhasil diperbarui!');
         }
     }
 
     public function delete($id)
     {
         DB::table('events')->where('id_event', $id)->delete();
-        return redirect('event')->with('success', 'Event berhasil dihapus.');
+        return redirect('detailEvents')->with('success', 'Event berhasil dihapus.');
     }
 }

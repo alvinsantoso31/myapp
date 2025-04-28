@@ -16,9 +16,11 @@ return new class extends Migration
             $table->string('nama_event');
             $table->text('deskripsi_event');
             $table->date('tanggal_event');
+            $table->date('tanggal_closing');
             $table->string('lokasi_event');
             $table->timestamp('jadwal_briefing');
             $table->string('tipe_event');
+            $table->string('status')->default('pre-event');
             $table->timestamps();
         });
     }

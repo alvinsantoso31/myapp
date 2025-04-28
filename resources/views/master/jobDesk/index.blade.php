@@ -1,5 +1,5 @@
 @extends('layouts.app', [
-    'activePage' => 'jobdesk.index',
+    'activePage' => 'D.index',
     'title' => 'Job Desk',
     'navName' => 'Master Jobdesk',
     'activeButton' => 'laravel',

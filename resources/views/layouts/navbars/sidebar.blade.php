@@ -36,6 +36,7 @@ Tip 2: you can also add an image using data-image tag
                 </a>
             </li>
 
+
             <li class="nav-item">
                 <a class="nav-link" data-bs-toggle="collapse" href="#laravelExamples"
                     aria-expanded="{{ $activeButton == 'laravel' ? 'true' : 'false' }}">
@@ -49,12 +50,6 @@ Tip 2: you can also add an image using data-image tag
                 </a>
                 <div class="collapse {{ $activeButton == 'laravel' ? 'show' : '' }}" id="laravelExamples">
                     <ul class="nav">
-                        <li class="nav-item @if ($activePage == 'user') active @endif">
-                            <a class="nav-link" href="{{ route('profile.edit') }}">
-                                <i class="nc-icon nc-single-02"></i>
-                                <p>{{ __('User Profile') }}</p>
-                            </a>
-                        </li>
                         <li class="nav-item @if ($activePage == 'crew.index') active @endif">
                             <a class="nav-link" href="{{ URL('crew') }}">
                                 <i class="nc-icon nc-single-02"></i>
@@ -65,14 +60,21 @@ Tip 2: you can also add an image using data-image tag
                         <li class="nav-item @if ($activePage == 'event.index') active @endif">
                             <a class="nav-link" href="{{ URL('event') }}">
                                 <i class="nc-icon nc-puzzle-10"></i>
-                                <p>{{ __('Event') }}</p>
+                                <p>{{ __('History Event') }}</p>
                             </a>
                         </li>
 
-                        <li class="nav-item @if ($activePage == 'event.index') active @endif">
+                        <li class="nav-item @if ($activePage == 'jobdesk.index') active @endif">
                             <a class="nav-link" href="{{ URL('jobDesk') }}">
                                 <i class="nc-icon nc-tag-content"></i>
                                 <p>{{ __('Job desk') }}</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item @if ($activePage == 'detail_events.index') active @endif">
+                            <a class="nav-link" href="{{ URL('detailEvents') }}">
+                                <i class="nc-icon nc-tag-content"></i>
+                                <p>{{ __('Detail Event') }}</p>
                             </a>
                         </li>
                     </ul>
@@ -105,7 +107,17 @@ Tip 2: you can also add an image using data-image tag
 
                 </div>
             </li>
+            <li class="nav-item @if ($activePage == 'dashboard') active @endif">
+                <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <a class="nav-link text-danger" href="{{ route('logout') }}"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="nc-icon nc-button-power"></i>
+                        logout
+                    </a>
+                </form>
 
+            </li>
 
         </ul>
     </div>

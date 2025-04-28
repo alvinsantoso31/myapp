@@ -9,7 +9,7 @@
 <div class="content">
     <div class="container-fluid">
 
-        <a href="{{ url('event') }}" class="btn btn-secondary mb-3">← Kembali ke Daftar Event</a>
+        <a href="javascript:history.back()" class="btn btn-secondary mb-3">&larr; Kembali</a>
 
         <div class="row justify-content-start">
             <div class="col-md-6">
@@ -27,15 +27,20 @@
                                 <label>Nama Event</label>
                                 <input type="text" name="nama_event" class="form-control" value="{{ old('nama_event', $event->nama_event ?? '') }}" required>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label>Deskripsi Event</label>
                                 <textarea name="deskripsi_event" class="form-control" rows="3" required>{{ old('deskripsi_event', $event->deskripsi_event ?? '') }}</textarea>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label>Tanggal Event</label>
                                 <input type="date" name="tanggal_event" class="form-control" value="{{ old('tanggal_event', isset($event) ? \Carbon\Carbon::parse($event->tanggal_event)->format('Y-m-d') : '') }}" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Tanggal Closing</label>
+                                <input type="date" name="tanggal_closing" class="form-control" value="{{ old('tanggal_closing', isset($event) ? \Carbon\Carbon::parse($event->tanggal_closing)->format('Y-m-d') : '') }}" required>
                             </div>
 
                             <div class="form-group">
@@ -45,8 +50,7 @@
 
                             <div class="form-group">
                                 <label>Jadwal Briefing</label>
-                                <input type="datetime-local" name="jadwal_briefing" class="form-control"
-                                    value="{{ old('jadwal_briefing', isset($event) ? \Carbon\Carbon::parse($event->jadwal_briefing)->format('Y-m-d\TH:i') : '') }}" required>
+                                <input type="datetime-local" name="jadwal_briefing" class="form-control" value="{{ old('jadwal_briefing', isset($event) ? \Carbon\Carbon::parse($event->jadwal_briefing)->format('Y-m-d\TH:i') : '') }}" required>
                             </div>
 
                             <div class="form-group">

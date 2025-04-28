@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('crew', function (Blueprint $table) {
             $table->id('id_crew');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('nama_lengkap');
             $table->string('no_telp');
             $table->string('jabatan');

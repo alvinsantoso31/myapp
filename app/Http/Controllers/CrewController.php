@@ -36,24 +36,40 @@ class CrewController extends Controller
             'level' => 'required|in:junior,intermediate,senior',
         ]);
 
-        if (empty(request()->id_crew)) {
+        if (empty($request->id_crew)) {
+            $userId = DB::table('users')->insertGetId([
+                'name' => $validated['nama_lengkap'],
+                'email' => strtolower(str_replace(' ', '', $validated['nama_lengkap'])),
+                'password' => Hash::make('123456'),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+
             DB::table('crew')->insert(array_merge($validated, [
+                'user_id' => $userId,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]));
-            return redirect('crew')->with('success', 'Data crew berhasil ditambahkan!');
+
+            return redirect('crew')->with('success', 'Data crew dan user berhasil ditambahkan!');
         } else {
             DB::table('crew')->where('id_crew', request()->id_crew)->update(array_merge($validated, [
                 'updated_at' => now(),
             ]));
+
             return redirect('crew')->with('success', 'Data crew berhasil diupdate!');
         }
     }
 
     public function delete($id)
     {
-        DB::table('crew')->where('id_crew', $id)->delete();
+        $crew = DB::table('crew')->where('id_crew', $id)->first();
 
-        return redirect('crew')->with('success', 'Data crew berhasil dihapus.');
+        if ($crew) {
+            DB::table('users')->where('id', $crew->user_id)->delete();
+            DB::table('crew')->where('id_crew', $id)->delete();
+        }
+
+        return redirect('crew')->with('success', 'Data crew dan user berhasil dihapus.');
     }
 }
